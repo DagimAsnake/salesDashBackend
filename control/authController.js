@@ -68,7 +68,7 @@ module.exports.changeForgetPassword = async function (req, res) {
     const user = await User.findById(userId)
     if (!user) {
         return res.json({
-            msg: "User not found"
+            msg: "Invalid or Expired Token"
         }).status(200)
     }
     const check_token = await Token.findOne({ token: token })

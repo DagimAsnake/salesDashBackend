@@ -15,7 +15,7 @@ module.exports = (req, res, next) => {
             status: 401
         })
     } else {
-        console.log("decodedToken: ", decodedToken)
+        // console.log("decodedToken is correct")
     }
     next()
 }

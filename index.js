@@ -7,7 +7,7 @@ const cors = require('cors')
 const createAdmin = require('./util/seedAdmin')
 
 const authRouter = require('./router/authRouter')
-
+const userRouter = require("./router/userRouter")
 
 mongoose.set("strictQuery", true)
 
@@ -40,3 +40,4 @@ app.use(function (req, res, next) {
 app.use(cors());
 
 app.use("/auth", authRouter);
+app.use("/user", userRouter);
