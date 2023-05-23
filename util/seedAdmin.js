@@ -10,7 +10,7 @@ const createAdmin = async function () {
             username: 'Admin',
             firstname: 'Admin',
             lastname: 'Admin',
-            email: "Admin@Admin.com",
+            email: "workdagimasnake@gmail.com",
             password: password
         }
         const admin = new User(newData)
