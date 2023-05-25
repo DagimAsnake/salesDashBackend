@@ -11,7 +11,8 @@ const createAdmin = async function () {
             firstname: 'Admin',
             lastname: 'Admin',
             email: "workdagimasnake@gmail.com",
-            password: password
+            password: password,
+            role: 'Admin'
         }
         const admin = new User(newData)
         await admin.save()

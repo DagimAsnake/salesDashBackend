@@ -21,8 +21,13 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true
-    }
-})
+    },
+    role: {
+        type: String,
+        required: true,
+        enum: ["Admin", "Employee"],
+    },
+}, { timestamps: true })
 
 const User = model("User", userSchema)
 

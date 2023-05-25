@@ -28,13 +28,34 @@ module.exports.Login = wrapAsync(async (req, res) => {
             msg: "Incorrect email or password"
         }).status(401)
     }
-    const token = jwt.sign({ id: user._id }, SECRET_KEY, { expiresIn: "24h" })
+    const token = jwt.sign({ id: user._id, role: user.role }, SECRET_KEY, { expiresIn: "24h" })
     return res.json({
         msg: 'Logged in successfully',
         token: token
     })
 
 })
+
+module.exports.VerifyUserToken = wrapAsync(async function (req, res) {
+    const token = req.get("Authorization").split(" ")[1];
+    const validToken = jwt.verify(token, SECRET_KEY);
+    if (validToken) {
+        return res
+            .json({
+                msg: true,
+                payload: {
+                    user: validToken.id,
+                    role: validToken.role,
+                },
+            })
+            .status(401);
+    }
+    return res
+        .json({
+            msg: false,
+        })
+        .status(200);
+});
 
 
 module.exports.resetPassword = async function (req, res) {

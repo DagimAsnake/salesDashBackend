@@ -6,5 +6,6 @@ router.post('/login', authController.Login)
 router.post("/forgetpassword", authController.resetPassword);
 router.post("/passwordreset/:userId/:token", authController.changeForgetPassword);
 router.post("/changepassword", isUserAuth, authController.ChangePassword)
+router.get("/verifyusertoken", authController.VerifyUserToken);
 
 module.exports = router;
