@@ -110,3 +110,27 @@ module.exports.getAllUsers = wrapAsync(async function (req, res) {
         })
         .status(200);
 });
+
+module.exports.getOneUser = wrapAsync(async function (req, res) {
+    const { userid } = req.params;
+    const userDetail = await User.findById(userid);
+    if (!userDetail) {
+        return res
+            .json({
+                msg: "No such user",
+            })
+            .status(401);
+    }
+    let data = {
+        firstname: userDetail.firstname,
+        lastname: userDetail.lastname,
+        username: userDetail.username,
+        role: userDetail.role,
+        email: userDetail.email,
+    };
+    return res
+        .json({
+            msg: data,
+        })
+        .status(200);
+});

@@ -8,6 +8,7 @@ const createAdmin = require('./util/seedAdmin')
 
 const authRouter = require('./router/authRouter')
 const userRouter = require("./router/userRouter")
+const productRouter = require("./router/productRouter")
 
 mongoose.set("strictQuery", true)
 
@@ -41,3 +42,4 @@ app.use(cors());
 
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
+app.use("/product", productRouter)

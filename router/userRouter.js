@@ -9,4 +9,6 @@ router.put("/edit", isUserAuth, userController.EditUserProfile);
 router.post("/post", isUserAuth, isAdmin, userController.CreateUser);
 router.get("/", isUserAuth, isAdmin, userController.getAllUsers);
 
+router.get("/detail/:userid", isUserAuth, userController.getOneUser);
+
 module.exports = router;
