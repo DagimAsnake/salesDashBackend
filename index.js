@@ -10,6 +10,7 @@ const authRouter = require('./router/authRouter')
 const userRouter = require("./router/userRouter")
 const productRouter = require("./router/productRouter")
 const salesRouter = require("./router/salesRouter")
+const analyticsRouter = require("./router/analyticRouter")
 
 mongoose.set("strictQuery", true)
 
@@ -45,3 +46,4 @@ app.use("/auth", authRouter);
 app.use("/user", userRouter);
 app.use("/product", productRouter)
 app.use("/sales", salesRouter)
+app.use("/analytics", analyticsRouter)

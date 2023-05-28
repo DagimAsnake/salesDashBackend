@@ -22,6 +22,9 @@ const productSchema = new Schema({
     },
     location: {
         type: String
+    },
+    users: {
+        type: Number
     }
 }, { timestamps: true })
 

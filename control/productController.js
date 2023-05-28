@@ -19,6 +19,7 @@ module.exports.getAllProducts = wrapAsync(async function (req, res) {
             soldBy: product.soldBy,
             price: product.price,
             location: product.location,
+            users: product.users
         };
         data.push(datas);
     });

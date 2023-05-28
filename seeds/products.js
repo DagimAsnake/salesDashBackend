@@ -7,6 +7,7 @@ module.exports = [
         soldBy: "Abel",
         price: "7500",
         location: "New York",
+        users: "20"
     },
     {
         productType: "Car",
@@ -16,6 +17,7 @@ module.exports = [
         soldBy: "Dagim",
         price: "9500",
         location: "Addis Ababa",
+        users: "74"
     },
     {
         productType: "laptop",
@@ -31,6 +33,7 @@ module.exports = [
         soldBy: "Abel",
         price: "250",
         location: "Jimma",
+        users: "65"
     },
     {
         productType: "Phone",
@@ -46,6 +49,7 @@ module.exports = [
         soldBy: "Mike",
         price: "15",
         location: "Addis Ababa",
+        users: "89"
     },
     {
         productType: "laptop",
@@ -54,7 +58,8 @@ module.exports = [
         sold: true,
         soldBy: "John",
         price: "1500",
-        location: "Adam",
+        location: "Adama",
+        users: "98"
     },
     {
         productType: "Car",
@@ -70,6 +75,7 @@ module.exports = [
         soldBy: "Abel",
         price: "30",
         location: "New York",
+        users: "10"
     },
     {
         productType: "Shoe",
@@ -79,6 +85,7 @@ module.exports = [
         soldBy: "Mike",
         price: "25",
         location: "Afar",
+        users: "55"
     },
     {
         productType: "Shoe",
@@ -94,6 +101,7 @@ module.exports = [
         soldBy: "Yonas",
         price: "1200",
         location: "Afar",
+        users: "73"
     },
     {
         productType: "Watch",
@@ -103,6 +111,7 @@ module.exports = [
         soldBy: "Yonas",
         price: "600",
         location: "London",
+        users: "31"
     },
     {
         productType: "Watch",
@@ -130,6 +139,7 @@ module.exports = [
         soldBy: "Tina",
         price: "90",
         location: "New York",
+        users: "8"
     },
     {
         productType: "Motor Cycle",
@@ -139,6 +149,7 @@ module.exports = [
         soldBy: "Abel",
         price: "700",
         location: "Cairo",
+        users: "64"
     },
     {
         productType: "Motor Cycle",
@@ -154,6 +165,7 @@ module.exports = [
         soldBy: "Robel",
         price: "300",
         location: "London",
+        users: "45"
     },
     {
         productType: "Bed",
@@ -163,6 +175,7 @@ module.exports = [
         soldBy: "Robel",
         price: "100",
         location: "London",
+        users: "48"
     },
 
 ]

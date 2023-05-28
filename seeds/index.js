@@ -25,6 +25,7 @@ const seedDb = async () => {
             soldBy: products[rand20].soldBy,
             price: products[rand20].price,
             location: products[rand20].location,
+            users: products[rand20].users
         })
         await p.save()
     }
