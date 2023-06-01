@@ -12,6 +12,13 @@ module.exports.productSales = wrapAsync(async function (req, res) {
                     $sum: "$price"
                 }
             }
+        },
+        {
+            $project: {
+                _id: 0,
+                productName: "$_id.productName",
+                totalAddedCost: 1
+            }
         }
     ]);
     return res.json({
