@@ -29,7 +29,7 @@ module.exports.getAnalytics = wrapAsync(async function (req, res) {
 });
 
 module.exports.getRecentProduct = async function (req, res) {
-    const Recents = await Product.find({ sold: true }).sort({ createdAt: -1 }).limit(5);
+    const Recents = await Product.find({ sold: true }).sort({ createdAt: -1 }).limit(8);
     let data = [];
     Recents.forEach((product) => {
         let datas = {
