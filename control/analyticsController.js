@@ -7,16 +7,25 @@ module.exports.getAnalytics = wrapAsync(async function (req, res) {
     const productAnalytics = await Product.aggregate([
         {
             $group: {
-                _id: { productName: "$productName", productType: "$productType" },
+                _id: { productName: "$productName" },
                 totalUsers: { $sum: "$users" },
                 totalAddedCost: { $sum: "$price" },
+                productType: { $first: "$productType" }
+            }
+        },
+        {
+            $project: {
+                _id: 0,
+                productName: "$_id.productName",
+                totalUsers: 1,
+                totalAddedCost: 1,
+                productType: 1
             }
         }
     ]);
-    return res.json({
+    return res.status(200).json({
         msg: productAnalytics,
-    })
-        .status(200);
+    });
 });
 
 module.exports.getRecentProduct = async function (req, res) {
