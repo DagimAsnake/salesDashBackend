@@ -127,10 +127,34 @@ module.exports.getOneUser = wrapAsync(async function (req, res) {
         username: userDetail.username,
         role: userDetail.role,
         email: userDetail.email,
+        isactive: userDetail.isactive
     };
     return res
         .json({
             msg: data,
         })
         .status(200);
+});
+
+module.exports.SetActive = wrapAsync(async function (req, res) {
+    const data = req.body.isactive
+    const { id } = req.params;
+
+    const user = await User.findById(id);
+
+    if (!user) {
+        return res
+            .json({
+                msg: "No user found",
+            })
+            .status(200);
+    }
+    user.isactive = data;
+    await user.save();
+    return res
+        .json({
+            msg: "Activation works correctly",
+        })
+        .status(200);
+
 });

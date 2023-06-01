@@ -28,6 +28,11 @@ module.exports.Login = wrapAsync(async (req, res) => {
             msg: "Incorrect email or password"
         }).status(401)
     }
+    if (!user.isactive) {
+        return res.json({
+            msg: "You are not allowed to log in"
+        }).status(401)
+    }
     const token = jwt.sign({ id: user._id, role: user.role }, SECRET_KEY, { expiresIn: "24h" })
     return res.json({
         msg: 'Logged in successfully',

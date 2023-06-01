@@ -20,12 +20,30 @@ module.exports.isAdmin = (req, res, next) => {
     next();
 };
 
-module.exports.isEmployee = (req, res, next) => {
+module.exports.isMarketing = (req, res, next) => {
     const token = req.get("Authorization").split(" ")[1];
     let decodedToken;
     try {
         decodedToken = jwt.verify(token, SECRET_KEY);
-        if (decodedToken.role != "Employee") {
+        if (decodedToken.role != "Marketing") {
+            return res
+                .json({
+                    msg: "You are Unauthorized to view this content",
+                })
+                .status(403);
+        }
+    } catch (err) {
+        console.log(err);
+    }
+    next();
+};
+
+module.exports.isSales = (req, res, next) => {
+    const token = req.get("Authorization").split(" ")[1];
+    let decodedToken;
+    try {
+        decodedToken = jwt.verify(token, SECRET_KEY);
+        if (decodedToken.role != "Sales") {
             return res
                 .json({
                     msg: "You are Unauthorized to view this content",

@@ -25,8 +25,13 @@ const userSchema = new Schema({
     role: {
         type: String,
         required: true,
-        enum: ["Admin", "Employee"],
+        enum: ["Admin", "Sales", "Marketing"],
     },
+    isactive: {
+        type: Boolean,
+        required: true,
+        default: true
+    }
 }, { timestamps: true })
 
 const User = model("User", userSchema)
