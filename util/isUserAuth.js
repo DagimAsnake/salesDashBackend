@@ -8,6 +8,10 @@ module.exports = (req, res, next) => {
         decodedToken = jwt.verify(token, SECRET_KEY)
     } catch (err) {
         console.log(err)
+        return res.json({
+            msg: "Token expired",
+            status: 401
+        })
     }
     if (!decodedToken) {
         return res.json({

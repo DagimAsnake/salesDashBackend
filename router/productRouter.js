@@ -9,4 +9,7 @@ router.get("/detail/:proid", isUserAuth, productController.getOneProduct);
 router.get("/dashboard", isUserAuth, productController.getDashboardData);
 router.get("/piechart", isUserAuth, productController.getPieChart);
 
+router.post('/addprodcut', isUserAuth, productController.CreateProduct)
+router.get('/invproduct', isUserAuth, productController.getInventoryProducts)
+
 module.exports = router;
