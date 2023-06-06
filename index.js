@@ -5,6 +5,8 @@ const { express, app } = require('./server')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const createAdmin = require('./util/seedAdmin')
+const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 
 const authRouter = require('./router/authRouter')
 const userRouter = require("./router/userRouter")
@@ -30,6 +32,27 @@ createAdmin()
     .catch((err) => {
         console.log(err)
     })
+
+const swaggerOptions = {
+    definition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'Sales Dashboard',
+            version: '1.0.0',
+            description: 'A simple sales dashboard',
+        },
+        servers: [
+            {
+                url: 'http://localhost:8000',
+            },
+        ],
+    },
+    apis: ['./router/*.js'],
+};
+
+const swaggerSpec = swaggerJSDoc(swaggerOptions);
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
