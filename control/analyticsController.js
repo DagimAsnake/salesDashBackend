@@ -65,3 +65,99 @@ module.exports.getLocation = wrapAsync(async function (req, res) {
     })
         .status(200);
 });
+
+module.exports.searchAnalytics = async (req, res, next) => {
+    try {
+        const { search } = req.query;
+        let query = {};
+        if (search) {
+            query.productName = { $regex: search, $options: 'i' };
+        }
+        const filteredData = await Product.aggregate([
+            {
+                $match: query
+            },
+            {
+                $group: {
+                    _id: { productName: "$productName" },
+                    totalAddedCost: {
+                        $sum: "$price"
+                    },
+                    totalUsers: {
+                        $sum: "$users"
+                    },
+                    productType: {
+                        $first: "$productType"
+                    }
+                }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    productName: "$_id.productName",
+                    totalAddedCost: 1,
+                    totalUsers: 1,
+                    productType: 1
+                }
+            }
+        ]);
+        
+        res.status(200).json({ msg: filteredData });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ msg: 'Internal server error' });
+    }
+};
+module.exports.searchRecent = async (req, res) => {
+    try {
+      const { search, startDate, endDate } = req.query;
+      let query = {};
+  
+      if (search) {
+        query.productName = { $regex: search, $options: 'i' };
+      }
+  
+      if (startDate && endDate) {
+        query.createdAt = {
+          $gte: new Date(startDate),
+          $lte: new Date(endDate),
+        };
+      }
+  
+      const recentProducts = await Product.aggregate([
+        {
+          $match: query,
+        },
+        {
+          $project: {
+            productName: 1,
+            price: 1,
+            createdAt: 1,
+          },
+        },
+        {
+          $group: {
+            _id: { productName: '$productName', createdAt: '$createdAt' },
+            totalAddedCost: {
+              $sum: '$price',
+            },
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+            productName: '$_id.productName',
+            createdAt: '$_id.createdAt',
+            totalAddedCost: 1,
+          },
+        },
+      ])
+        .sort({ createdAt: -1 })
+        .exec();
+  
+      res.json({ success: true, recentProducts });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ success: false, error: error.message });
+    }
+  };

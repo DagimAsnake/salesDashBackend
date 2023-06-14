@@ -49,3 +49,54 @@ module.exports.popularProducts = wrapAsync(async function (req, res) {
         msg: popular
     }).status(200)
 })
+
+
+module.exports.searchPopular = wrapAsync(async (req, res) => {
+    try {
+        const { search } = req.query;
+        let query = {};
+        if (search) {
+            query.productName = { $regex: search, $options: 'i' };
+        }
+        const result = await Product.find(query).sort({ sold: -1 }).limit(10);
+        res.json({ msg: result });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ msg: 'Internal server error' });
+    }
+})
+
+
+module.exports.searchSales = async (req, res, next) => {
+    try {
+        const { search } = req.query;
+        let query = {};
+        if (search) {
+            query.productName = { $regex: search, $options: 'i' };
+        }
+        const productSales = await Product.aggregate([
+            {
+                $match: query
+            },
+            {
+                $group: {
+                    _id: { productName: "$productName" },
+                    totalAddedCost: {
+                        $sum: "$price"
+                    }
+                }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    productName: "$_id.productName",
+                    totalAddedCost: 1
+                }
+            }
+        ]);
+        res.json({ msg: productSales });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ msg: 'Internal server error' });
+    }
+};

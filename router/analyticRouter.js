@@ -99,5 +99,8 @@ router.get('/recent', isUserAuth, analyticsController.getRecentProduct)
  */
 router.get('/location', isUserAuth, analyticsController.getLocation)
 
+router.get('/search', analyticsController.searchAnalytics);
+
+router.get('/searchrecent', analyticsController.searchRecent)
 
 module.exports = router

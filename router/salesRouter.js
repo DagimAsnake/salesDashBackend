@@ -104,4 +104,8 @@ router.get('/', isUserAuth, salesController.productSales)
  */
 router.get('/popular', isUserAuth, salesController.popularProducts)
 
+router.get('/popularsearch', isUserAuth, salesController.searchPopular)
+
+router.get('/salesSearch', isUserAuth, salesController.searchSales)
+
 module.exports = router
